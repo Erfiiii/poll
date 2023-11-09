@@ -1,6 +1,5 @@
 import { PropsWithChildren, useCallback, useMemo } from "react";
-import { Option } from "../../types";
-import "./PollOption.css";
+import { Option } from "../types";
 
 interface OwnProps {
   option: Option;

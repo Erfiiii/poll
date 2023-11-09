@@ -1,16 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import "./index.css";
-
-const poll = {
-  question: "test",
-  options: [
-    "tes1",
-    "tes2",
-    "test3"
-  ]
-}
+import style from  "./index.css";
 
 class XPoll extends HTMLElement {
   constructor() {
@@ -22,7 +13,32 @@ class XPoll extends HTMLElement {
   }
 
   connectedCallback() {
-    ReactDOM.createRoot(document.getElementById("root")!).render(
+    const mountPoint = document.createElement("div");
+    this.attachShadow({ mode: "open" }).appendChild(mountPoint);
+
+
+    const styleTag = document.createElement("style");
+    styleTag.innerHTML = style;
+    this.shadowRoot?.appendChild(styleTag)
+
+    
+    const question = this.getAttribute("question") ?? "";
+
+    const options = this.querySelectorAll("x-option");
+
+    const texts: string[] = [];
+    options.forEach((option) => {
+      if (option.textContent) {
+        texts.push(option.textContent);
+      }
+    });
+
+    const poll = {
+      question: question,
+      options: texts,
+    };
+
+    ReactDOM.createRoot(mountPoint).render(
       <React.StrictMode>
         <App config={poll} />
       </React.StrictMode>
@@ -37,6 +53,4 @@ class XOption extends HTMLElement {
 }
 
 window.customElements.define("x-poll", XPoll);
-window.customElements.define("x-option", XOption)
-
-
+window.customElements.define("x-option", XOption);

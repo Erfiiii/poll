@@ -18,3 +18,96 @@
 
 
 
+.poll {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px 5px rgba(35, 30, 128, 0.1);
+  animation: Opacity 1s forwards ease-in;
+}
+
+@media screen and (max-width: 800px) {
+  .poll {
+    right: auto;
+  }
+}
+
+@keyframes Opacity {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.question {
+  padding: 20px;
+  color: #111;
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+}
+
+.answers {
+  padding: 20px 20px 10px;
+}
+
+.submit-btn {
+  border-radius: 4px;
+  border: none;
+  background-color: #506ce5;
+  color: #fff;
+  width: 100%;
+  height: 40px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.answer {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  padding: 0px 10px;
+  line-height: 40px;
+  color: #111;
+  margin-bottom: 10px;
+  border: 1px solid #d4d4d4;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.answer.selected {
+  border: 2px solid #8f9fe8;
+}
+
+.answer.disabled {
+  pointer-events: none;
+}
+
+.percentage-value {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 40px;
+  transform: translateY(-50%);
+  color: #111;
+  font-size: 15px;
+}
+
+.percentage-bar {
+  position: absolute;
+  opacity: 0.4;
+  top: 0px;
+  left: 0px;
+  width: 50%;
+  height: 100%;
+  background: #ccd8f1;
+  transition: width 300ms ease-in-out;
+}

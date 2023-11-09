@@ -1,23 +1,26 @@
-import type { Poll } from "./types";
+import type { Option, Poll, Config } from "./types";
 
-export const save = (poll: Poll): void => {
-  //   const storagePolls = localStorage.getItem("poll");
-  //   const polls = storagePolls ? (JSON.parse(storagePolls) as Poll[]) : [];
-
-  //   polls.forEach((item) => {
-  //     if (item.question === poll.question) {
-  //       item.answers = poll.answers;
-  //     }
-  //   });
-  localStorage.setItem("poll", JSON.stringify(poll));
+export const addOption = async (option: Option) => {
+  const storagePoll = await localStorage.getItem("poll") as string;
+  const poll = JSON.parse(storagePoll) as Poll
+  const newPoll = {
+    ...poll,
+    answers: poll?.answers.map((item) =>
+      item.value === option.value ? { ...item, count: item.count + 1 } : item
+    ),
+  };
+  await localStorage.setItem("poll", JSON.stringify(newPoll));
 };
 
-export const load = (config: { question: string; options: string[] }) => {
-  const storagePolls = localStorage.getItem("poll");
-  return storagePolls
-    ? (JSON.parse(storagePolls) as Poll)
+export const load = async (config: Config) => {
+  const storagePoll = await localStorage.getItem("poll");
+  return storagePoll
+    ? (JSON.parse(storagePoll) as Poll)
     : {
         question: config.question,
         answers: config.options.map((item) => ({ count: 0, value: item })),
       };
 };
+
+export const getTotalCount = (poll: Poll) =>
+  poll.answers.reduce((pre, cur) => pre + cur.count, 0);
