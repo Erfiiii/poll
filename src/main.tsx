@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import style from "./index.css";
+import { Config } from "./types.ts";
 
+let appConfigs: Config[] = [];
 class XPoll extends HTMLElement {
   constructor() {
     super();
@@ -22,8 +24,10 @@ class XPoll extends HTMLElement {
 
     const texts: string[] = [];
     options.forEach((option) => {
-      if (option.textContent) {
-        texts.push(option.textContent);
+      if (option.getAttribute("option")) {
+        // eslint-disable-next-line
+        // @ts-ignore
+        texts.push(option.getAttribute("option"));
       }
     });
 
@@ -31,6 +35,15 @@ class XPoll extends HTMLElement {
       question: question,
       options: texts,
     };
+
+    if (appConfigs) {
+      if (appConfigs.find((item) => item.question === question)) {
+        return;
+      }
+      appConfigs.push(poll);
+    } else {
+      appConfigs = [poll];
+    }
 
     ReactDOM.createRoot(mountPoint).render(
       <React.StrictMode>
@@ -40,11 +53,4 @@ class XPoll extends HTMLElement {
   }
 }
 
-class XOption extends HTMLElement {
-  constructor() {
-    super();
-  }
-}
-
 window.customElements.define("x-poll", XPoll);
-window.customElements.define("x-option", XOption);

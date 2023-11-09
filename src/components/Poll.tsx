@@ -1,14 +1,11 @@
 import { PropsWithChildren, useCallback, useEffect, useState } from "react";
-import type { Option, Poll as PollType } from "../types";
+import type { Config, Option, Poll as PollType } from "../types";
 import { getTotalCount } from "../utils";
 import PollOption from "./PollOption";
 import { useClientContext } from "../ClientContext";
 
 interface OwnProps {
-  config: {
-    question: string;
-    options: string[];
-  };
+  config: Config;
 }
 
 type Props = PropsWithChildren<OwnProps>;
