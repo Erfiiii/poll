@@ -1,6 +1,6 @@
 import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 import type { Option, Poll as PollType } from "../types";
-import { getTotalCount } from "../local-storage-client";
+import { getTotalCount } from "../utils";
 import PollOption from "./PollOption";
 import { useClientContext } from "../ClientContext";
 

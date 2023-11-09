@@ -1,27 +1,6 @@
-import { expect, test, describe, it, beforeEach } from "vitest";
-import { load, addAnswer, getTotalCount } from "./local-storage-client";
-import { Config, Option, Poll } from "./types";
-
-test("totalCount", () => {
-  const poll: Poll = {
-    question: "test",
-    answers: [
-      {
-        count: 10,
-        value: "answer1",
-      },
-      {
-        count: 5,
-        value: "answer1",
-      },
-      {
-        count: 2,
-        value: "answer1",
-      },
-    ],
-  };
-  expect(getTotalCount(poll)).equal(17);
-});
+import { expect, describe, it, beforeEach } from "vitest";
+import { load, addAnswer } from "./local-storage-client";
+import { Config, Option } from "./types";
 
 describe("Load and addOption to poll data", () => {
   beforeEach(() => {
