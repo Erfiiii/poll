@@ -58,6 +58,8 @@ There are two mock folders for testing, each containing a built version of the a
    ```
 
 3. Run the built example in the test folders with:
+   I added the my-lib.js file to these folders so you can just run it easily and if you make change to the project you need to build again and replace the my-lib.js file that is in the `dist` folder.
+   
    ```bash
    cd __test__example/ProjectOne
    serve .
