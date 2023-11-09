@@ -8,6 +8,10 @@ export const addAnswer = async (option: Option, config: Config) => {
     }
   });
 
+  savePoll(poll);
+};
+
+const savePoll = (poll: Poll) => {
   const storagePolls = localStorage.getItem("poll-data");
   if (!storagePolls) {
     localStorage.setItem("poll-data", JSON.stringify([poll]));
@@ -15,13 +19,13 @@ export const addAnswer = async (option: Option, config: Config) => {
   }
   const polls = JSON.parse(storagePolls) as Poll[];
 
-  const foundPoll = polls.find(item=>item.question === poll.question)
-  if(foundPoll) {
+  const foundPoll = polls.find((item) => item.question === poll.question);
+  if (foundPoll) {
     foundPoll.answers = poll.answers;
   } else {
-    polls.push(poll)
+    polls.push(poll);
   }
- 
+
   localStorage.setItem("poll-data", JSON.stringify(polls));
 };
 
