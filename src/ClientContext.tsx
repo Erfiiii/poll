@@ -3,7 +3,7 @@ import { Config, Option, Poll } from "./types";
 
 export interface ClientContextType {
   load: (config: Config) => Promise<Poll>;
-  addOption: (option: Option) => Promise<void>;
+  addOption: (option: Option, config: Config) => Promise<void>;
 }
 export const ClientContext = createContext<ClientContextType | null>(null);
 

@@ -16,7 +16,6 @@ type Props = PropsWithChildren<OwnProps>;
 export default function Poll(props: Props) {
   const [poll, setPoll] = useState<PollType | undefined>(undefined);
   const [answer, setAnswer] = useState<string | null>(null);
-
   const { load, addOption } = useClientContext();
 
   useEffect(() => {
@@ -30,7 +29,7 @@ export default function Poll(props: Props) {
   const onSelectAnswer = useCallback(
     async (option: Option) => {
       setAnswer(option.value);
-      await addOption(option);
+      await addOption(option, props.config);
       const newPoll = await load(props.config);
       setPoll(newPoll);
     },
@@ -38,7 +37,7 @@ export default function Poll(props: Props) {
   );
 
   if (!poll) {
-    return <>Loading...</>;
+    return null
   }
   const totalCount = getTotalCount(poll);
 

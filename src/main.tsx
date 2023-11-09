@@ -1,27 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import style from  "./index.css";
+import style from "./index.css";
 
 class XPoll extends HTMLElement {
   constructor() {
     super();
   }
 
-  static get observedAttributes() {
-    return ["config"];
-  }
-
   connectedCallback() {
     const mountPoint = document.createElement("div");
     this.attachShadow({ mode: "open" }).appendChild(mountPoint);
 
-
     const styleTag = document.createElement("style");
     styleTag.innerHTML = style;
-    this.shadowRoot?.appendChild(styleTag)
+    this.shadowRoot?.appendChild(styleTag);
 
-    
     const question = this.getAttribute("question") ?? "";
 
     const options = this.querySelectorAll("x-option");
