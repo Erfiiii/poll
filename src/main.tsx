@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import style from "./index.css";
+import styles from './index.css'
 import { Config } from "./types.ts";
 
 let appConfigs: Config[] = [];
@@ -15,7 +15,7 @@ class XPoll extends HTMLElement {
     this.attachShadow({ mode: "open" }).appendChild(mountPoint);
 
     const styleTag = document.createElement("style");
-    styleTag.innerHTML = style;
+    styleTag.innerHTML = styles;
     this.shadowRoot?.appendChild(styleTag);
 
     const question = this.getAttribute("question") ?? "";
