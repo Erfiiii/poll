@@ -1,5 +1,5 @@
 import { expect, test, describe, it, beforeEach } from "vitest";
-import { load, addOption, getTotalCount } from "./utils";
+import { load, addAnswer, getTotalCount } from "./local-storage-client";
 import { Config, Option, Poll } from "./types";
 
 test("totalCount", () => {
@@ -52,7 +52,7 @@ describe("Load and addOption to poll data", () => {
       count: 0,
       value: "test2",
     };
-    await addOption(option, config);
+    await addAnswer(option, config);
     const data = await load(config);
     expect(data).toMatchObject({
       question: "test",

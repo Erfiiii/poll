@@ -1,12 +1,8 @@
 import { PropsWithChildren } from "react";
 import Poll from "./components/Poll";
 import { ClientContextProvider } from "./ClientContext";
-import { load, addOption } from "./utils";
+import { client } from "./local-storage-client";
 
-const client = {
-  load,
-  addOption
-}
 interface OwnProps {
   config: {
     question: string;

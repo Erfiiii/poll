@@ -1,6 +1,6 @@
 import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 import type { Option, Poll as PollType } from "../types";
-import { getTotalCount } from "../utils";
+import { getTotalCount } from "../local-storage-client";
 import PollOption from "./PollOption";
 import { useClientContext } from "../ClientContext";
 
@@ -16,28 +16,26 @@ type Props = PropsWithChildren<OwnProps>;
 export default function Poll(props: Props) {
   const [poll, setPoll] = useState<PollType | undefined>(undefined);
   const [answer, setAnswer] = useState<string | null>(null);
-  const { load, addOption } = useClientContext();
+  const { load, addAnswer } = useClientContext();
 
   useEffect(() => {
-    async function loadPoll() {
-      const poll = await load(props.config);
+    load(props.config).then((poll) => {
       setPoll(poll);
-    }
-    loadPoll();
+    });
   }, []);
 
   const onSelectAnswer = useCallback(
     async (option: Option) => {
       setAnswer(option.value);
-      await addOption(option, props.config);
+      await addAnswer(option, props.config);
       const newPoll = await load(props.config);
       setPoll(newPoll);
     },
-    [props.config, load, addOption]
+    [props.config, load, addAnswer]
   );
 
   if (!poll) {
-    return null
+    return null;
   }
   const totalCount = getTotalCount(poll);
 

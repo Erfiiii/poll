@@ -12,3 +12,8 @@ export interface Config {
     question: string;
     options: string[]
 }
+
+export interface ClientContextType {
+    load: (config: Config) => Promise<Poll>;
+    addAnswer: (option: Option, config: Config) => Promise<void>;
+  }
