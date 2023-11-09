@@ -9,17 +9,18 @@ export default defineConfig(({ command }) => {
     test: {
       environment: "jsdom",
     },
-    build: {
-      lib: {
-        entry: resolve(__dirname, "./src/main.tsx"),
-        name: "MyLib",
-        fileName: "my-lib",
-      },
-    },
   };
+
   if (command === "build") {
     return {
-      ...common,
+      plugins: [react()],
+      build: {
+        lib: {
+          entry: resolve(__dirname, "./src/main.tsx"),
+          name: "MyLib",
+          fileName: "my-lib",
+        },
+      },
       define: { "process.env.NODE_ENV": '"production"' },
     };
   } else {

@@ -54,13 +54,21 @@ There are two mock folders for testing, each containing a built version of the a
 2. Add a reference to the built application file in your script tag.
 
    ```html
-   <script src="/dist/my-lib.js"></script>
+   <script src="path-to/my-lib.js"></script>
    ```
 
 3. Run the built example in the test folders with:
    ```bash
+   cd __test__example/ProjectOne
    serve .
    ```
+   or
+   ```bash
+   cd __test__example/ProjectTwo
+   serve .
+   ```
+
+   then go to http://localhost:3000 and enjoy!
 
 ### Implementation Decisions
 
