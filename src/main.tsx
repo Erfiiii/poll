@@ -1,10 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import styles from './index.css'
+import styles from "./index.css";
 import { Config } from "./types.ts";
 
 let appConfigs: Config[] = [];
+
+const mountReactApp = (config: Config, mountPoint: HTMLDivElement) => {
+  const root = ReactDOM.createRoot(mountPoint);
+  root.render(
+    <React.StrictMode>
+      <App config={config} />
+    </React.StrictMode>
+  );
+  return root;
+};
 class XPoll extends HTMLElement {
   constructor() {
     super();
@@ -45,11 +55,18 @@ class XPoll extends HTMLElement {
       appConfigs = [poll];
     }
 
-    ReactDOM.createRoot(mountPoint).render(
-      <React.StrictMode>
-        <App config={poll} />
-      </React.StrictMode>
-    );
+    let root = mountReactApp(appConfigs[0], mountPoint);
+
+    document.addEventListener("answer-selected", (e: CustomEventInit) => {
+      appConfigs = appConfigs.filter((item) => item.question !== e.detail);
+
+      setTimeout(() => {
+        root.unmount();
+        if (appConfigs.length) {
+          root = mountReactApp(appConfigs[0], mountPoint);
+        }
+      }, 2000);
+    });
   }
 }
 
