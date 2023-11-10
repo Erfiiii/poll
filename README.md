@@ -76,6 +76,6 @@ There are two mock folders for testing, each containing a built version of the a
 
 I chose to use `React.js` for this application due to my familiarity with it. While I acknowledge that other frameworks like `Svelte` might result in a smaller bundle size, my comfort with React led to this decision. For development and production-ready builds, I utilized `Vite` in `lib` mode to create a single JS file for easy inclusion in HTML files.
 
-### Note
+# Important Note
 You can see the implementation of `multiple poll in same page` in `feature-multiple-polls` branch.
 Note that the question in the poll acts as `id` and it should be unique to work correctly.
