@@ -27,6 +27,10 @@ export default function Poll(props: Props) {
       await addAnswer(option, props.config);
       const newPoll = await load(props.config);
       setPoll(newPoll);
+
+      const customEvent = new CustomEvent("answer-selected", {detail: props.config.question})
+      document.dispatchEvent(customEvent)
+
     },
     [props.config, load, addAnswer]
   );
